@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:34:23 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/06/12 11:05:19 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/06/16 11:16:55 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # include <sys/ioctl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-//# include <libft/libft.h>
+# include "libft/libft.h"
 
+//	UTILS.C
+int	ft_empty_line(const char *str);
 #endif

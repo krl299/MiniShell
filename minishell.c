@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:33:00 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/06/15 13:21:40 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/06/16 11:19:49 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ static void ft_leaks()
 static void	ft_ignore_signal(void)
 {
 	signal(SIGQUIT, SIG_IGN);
+}
+
+static void	ft_sigint_handler()
+{
+	rl_on_new_line();
+	rl_replace_line("", 1);
+	rl_redisplay();
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -40,15 +47,14 @@ int	main(int argc, char **argv, char **envp)
 		if (linebuffer == NULL)
 			break;
 		//user pressed CTRL-C to redisplay prompt
-		//signal(SIGINT, ft_sigint_handler);
+		signal(SIGINT, ft_sigint_handler);
 		//while is empty, not do it nothing
-		//if (ft_strcmp(linebuffer, "") == 0 || ft_empty_line(linebuffer) == 0)
-		//	continue;
+		if (ft_strncmp(linebuffer, "", strlen(linebuffer)) == 0 || ft_empty_line(linebuffer) == 0)
+		{
+			free(linebuffer);
+			continue;
+		}
 		add_history(linebuffer);
-//		rl_on_new_line();
-//		rl_replace_line("minishell $>", 1);
-//		rl_redisplay();
-//		printf("%s\n", linebuffer);
 		//lexically analyze and build a list o tokens
 		//ft_lexer(linebuffer);
 		//parse the tokens into an abstract syntax tree
