@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/16 11:11:31 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/06/16 12:59:56 by cmoran-l         ###   ########.fr       */
+/*   Created: 2023/06/16 13:47:15 by cmoran-l          #+#    #+#             */
+/*   Updated: 2023/06/16 13:47:51 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_empty_line(const char *str)
+void	ft_lexer()
 {
-	int	i;
 
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == ' ' || str[i] == '\t')
-			i++;
-		else
-			return (1);
-	}
-	return (0);
 }
