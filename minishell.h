@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:34:23 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/06/16 11:16:55 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:46:25 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,21 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft/libft.h"
+
+enum e_datatype
+{
+	SINGLE_QUOTE,
+	DOUBLE_QUOTE,
+	PIPE,
+	BUILTINS,
+	ENVI_VAR,
+	REDIRECTION
+};
+typedef struct s_token
+{
+	char			*string;
+	enum e_datatype	type;
+}t_token;
 
 //	UTILS.C
 int	ft_empty_line(const char *str);

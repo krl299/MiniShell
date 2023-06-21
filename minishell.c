@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:33:00 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/06/16 12:56:06 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/06/21 12:49:49 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,20 @@ static void ft_leaks()
 	system("leaks -q minishell");
 }
 
-static void	ft_ignore_signal(void)
+static void	ft_sigint_handler()
 {
-	signal(SIGQUIT, SIG_IGN);
-}
-
-/*static void	ft_sigint_handler()
-{
-	rl_on_new_line();
+	write(1, "\n", 1);
 	rl_replace_line("", 1);
+	rl_on_new_line();
 	rl_redisplay();
 }
-*/
+
+static void	ft_set_signal(void)
+{
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, ft_sigint_handler);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	atexit(ft_leaks);
@@ -37,11 +39,11 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	(void)envp;
 	//ignore Ctrl-\ signal
-	ft_ignore_signal();
+	ft_set_signal();
+	//keep getline in a loop in case interruption occurs
 	while(1)
 	{
 		linebuffer = NULL;
-		//keep getline in a loop in case interruption occurs
 		linebuffer = readline("Conchita $>");//when press TAB display files of directory
 		//user pressed CTRL-D to exit
 		if (linebuffer == NULL)

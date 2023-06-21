@@ -1,4 +1,4 @@
-SRCS	=	minishell.c	utils.c	
+SRCS	=	minishell.c	utils.c lexer.c	
 
 OBJS	=	${SRCS:.c=.o}
 
