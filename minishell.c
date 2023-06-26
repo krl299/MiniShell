@@ -3,42 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:33:00 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/06/26 18:04:42 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/06/26 18:36:25 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void ft_leaks()
+void	ft_leaks(void)
 {
 	system("leaks -q minishell");
 }
 
 int	main(int argc, char **argv, char **envp)
 {
+	t_data	data;
+
 	atexit(ft_leaks);
-	char	*linebuffer;
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	
+	ft_init_data(&data, argc, argv, envp);
 	ft_set_signal();
-	while(1)
+	while (1)
 	{
-		linebuffer = NULL;
-		linebuffer = readline("Conchita $>");
-		if (linebuffer == NULL)
-			break;
-		if (ft_strncmp(linebuffer, "", strlen(linebuffer)) == 0 || ft_empty_line(linebuffer) == 0)
+		data.linebuffer = NULL;
+		data.linebuffer = readline("Conchita $>");
+		if (data.linebuffer == NULL)
+			break ;
+		if (ft_strncmp(data.linebuffer, "", strlen(data.linebuffer)) == 0
+			|| ft_empty_line(data.linebuffer) == 0)
 		{
-			free(linebuffer);
-			continue;
+			free(data.linebuffer);
+			continue ;
 		}
-		add_history(linebuffer);
-		free(linebuffer);
+		add_history(data.linebuffer);
+		ft_create_tokens(&data);
+		free(data.linebuffer);
 	}
 	rl_clear_history();
 	return (0);
