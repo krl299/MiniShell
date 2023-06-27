@@ -1,4 +1,5 @@
-SRCS	=	minishell.c	signal.c	utils.c
+SRCS	=	minishell.c signal.c utils.c init_data.c parse_data.c \
+			parser.c
 
 OBJS	=	${SRCS:.c=.o}
 
@@ -23,7 +24,7 @@ all:	libft	$(NAME)
 
 libft:	
 		git submodule update --init
-		make -C libft extra
+		make -C libft
 
 $(NAME):	${OBJS}
 		${GCC} ${OBJS} ${RL_LIB_LINK} ${LIBFT_LINK} -o ${NAME}

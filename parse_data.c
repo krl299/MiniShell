@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:40:53 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/06/27 17:41:13 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/06/27 18:19:22 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_parse_data(t_data *data)
 	int	i;
 
 	cur = 0;
-	while (data->linebuffer[i])
+	while (data->linebuffer[cur])
 	{
 		i = cur;
 		if (data->linebuffer[i] == '\'')
