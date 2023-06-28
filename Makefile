@@ -1,5 +1,5 @@
 SRCS	=	minishell.c signal.c utils.c init_data.c parse_data.c \
-			parser.c cleaner.c
+			parser.c cleaner.c parse_data_utils.c
 
 OBJS	=	${SRCS:.c=.o}
 
@@ -23,7 +23,6 @@ RL_LIB_LINK	=	-L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 all:	libft	$(NAME)
 
 libft:	
-		git submodule update --init
 		make -C libft
 
 $(NAME):	${OBJS}
