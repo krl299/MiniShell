@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:34:23 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/06/28 20:02:07 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/06/27 19:47:17 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,11 @@ int		ft_empty_line(const char *str);
 void	ft_init_data(t_data *data, int argc, char **argv, char **envp);
 
 // PARSER.C
-int		ft_is_builtin(char *str);
 void	ft_create_tokens(t_data *data);
 void	ft_print_tokens(t_data *data);
 
 // PARSE_DATA.C
 void	ft_parse_data(t_data *data);
-void	ft_add_token(t_data *data, int i, int cur);
-
-// PARSE_DATA_UTILS.C
-void	ft_set_tokens_type(t_data *data);
-void	ft_add_token(t_data *data, int i, int cur);
-void	ft_process_quotes(t_data *data, int *iter, int *curr, char quote);
-void	ft_symbol_token(t_data *data, int *iter, int *curr, char symbol);
 
 // CLEANER.C
 void	ft_clean_tokens(t_data *data);
