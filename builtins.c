@@ -6,47 +6,58 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:17:40 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/06/29 14:46:46 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/06/29 19:01:42 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-static char	**ft_create_args(t_token *tokens)
+static int	ft_count_args(t_token *tokens)
 {
 	int	i;
-	char	**args;
+	t_token *aux;
 
 	i = 0;
-	while (tokens[++i].type == NO_QUOTE)
-	args = malloc(sizeof(char *) * i);
-	if (!args)
-		return (0);
-	args[i] = 0;
-	i = 0;
-	while (tokens[++i].type == NO_QUOTE)
+	aux = tokens;
+	while (aux->next != NULL && aux->next->type == NO_QUOTE)
 	{
-		args[i - 1] = tokens[i].string;
+		i++;
+		aux = aux->next;
+	}
+	return (i);
+}
+static char	**ft_create_args(t_token *tokens)
+{
+	int	count_args;
+	char	**args;
+	t_token	*aux;
+	int i;
+
+	count_args = ft_count_args(tokens);
+	args = malloc(sizeof(char **) * count_args);
+	aux = tokens->next;
+	i = 0;
+	while (aux && count_args > 0)
+	{
+		args[i] = aux->string;
+		aux = aux->next;
+		i++;
+		count_args--;
 	}
 	return (args);
 }
 
-static void	ft_delete_args(char **args)
-{
-	char *aux;
-
-	aux = *args;
-}
 void	ft_built(t_token *tokens)
 {
 	char **args;
+
 	if (ft_strcmp(tokens->string, "pwd") == 0)
 		ft_built_pwd();	
 	else if (ft_strcmp(tokens->string, "echo") == 0)
 	{
 		args = ft_create_args(tokens);
 		ft_built_echo(args);
-		ft_delete_args(args);
+		free(args);
 	}
 	else if (ft_strcmp(tokens->string, "cd") == 0)
 	{
@@ -108,7 +119,7 @@ void	ft_built_echo(char **input)
 	int	i;
 	int	flag;
 
-	i = 1;
+	i = 0;
 	flag = 0;
 	if (input[i] && ft_is_n(input[i]) == 1)
 	{
