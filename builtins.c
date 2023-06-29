@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:17:40 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/06/29 19:20:33 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/06/29 19:31:22 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,35 +48,35 @@ static char	**ft_create_args(t_token *tokens)
 	return (args);
 }
 
-void	ft_built(t_token *tokens)
+void	ft_built(t_data *data)
 {
 	char	**args;
 
-	if (ft_strcmp(tokens->string, "pwd") == 0)
+	if (ft_strcmp(data->tokens->string, "pwd") == 0)
 		ft_built_pwd();
-	else if (ft_strcmp(tokens->string, "echo") == 0)
+	else if (ft_strcmp(data->tokens->string, "echo") == 0)
 	{
-		args = ft_create_args(tokens);
+		args = ft_create_args(data->tokens);
 		ft_built_echo(args);
 		free(args);
 	}
-	else if (ft_strcmp(tokens->string, "cd") == 0)
+	else if (ft_strcmp(data->tokens->string, "cd") == 0)
 	{
 
 	}
-	else if (ft_strcmp(tokens->string, "export") == 0)
+	else if (ft_strcmp(data->tokens->string, "export") == 0)
 	{
 
 	}
-	else if (ft_strcmp(tokens->string, "unset") == 0)
+	else if (ft_strcmp(data->tokens->string, "unset") == 0)
 	{
 
 	}
-	else if (ft_strcmp(tokens->string, "env") == 0)
+	else if (ft_strcmp(data->tokens->string, "env") == 0)
 	{
-
+		ft_built_env(data);
 	}
-	else if (ft_strcmp(tokens->string, "exit") == 0)
+	else if (ft_strcmp(data->tokens->string, "exit") == 0)
 	{
 
 	}

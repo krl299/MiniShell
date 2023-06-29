@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:33:00 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/06/29 16:59:18 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/06/29 19:43:54 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 		add_history(data.linebuffer);
 		ft_create_tokens(&data);
 		ft_print_tokens(&data); // To be removed
-		ft_built(data.tokens);
+		ft_built(&data);
 		ft_clean_tokens(&data);
 	}
 	rl_clear_history();
