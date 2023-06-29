@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:40:53 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/06/27 20:08:19 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/06/29 20:18:49 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,22 @@ void	ft_process_quotes(t_data *data, int *iter, int *curr, char quote)
 {
 	int	cur;
 	int	i;
+	int	aux;
 
 	cur = *curr;
 	i = *iter;
+	aux = cur;
 	cur++;
 	while (data->linebuffer[cur] && data->linebuffer[cur] != quote)
 		cur++;
 	if (data->linebuffer[cur] == quote)
 		cur++;
+	else
+	{
+		cur = aux;
+		while (data->linebuffer[cur] && data->linebuffer[cur] != ' ')
+			cur++;
+	}
 	ft_add_token(data, i, cur);
 	*curr = cur;
 }
@@ -98,7 +106,8 @@ void	ft_symbol_token(t_data *data, int *iter, int *curr, char symbol)
 		while (data->linebuffer[cur] == ' ')
 			cur++;
 		while (data->linebuffer[cur]
-			&& ft_strchr("|><", data->linebuffer[cur]) == 0)
+			&& ft_strchr("|><", data->linebuffer[cur]) == 0
+			&& data->linebuffer[cur] != ' ')
 			cur++;
 	}
 	ft_add_token(data, i, cur);
@@ -113,21 +122,22 @@ void	ft_parse_data(t_data *data)
 	cur = 0;
 	while (data->linebuffer[cur])
 	{
+		while (data->linebuffer[cur] == ' ')
+			cur++;
 		i = cur;
-		if (data->linebuffer[cur] == '\'')
-			ft_process_quotes(data, &i, &cur, '\'');
-		else if (data->linebuffer[cur] == '\"')
-			ft_process_quotes(data, &i, &cur, '\"');
+		if (data->linebuffer[cur] == '\'' || data->linebuffer[cur] == '\"')
+			ft_process_quotes(data, &i, &cur, data->linebuffer[cur]);
 		else if (ft_strchr("|><", data->linebuffer[cur]))
 			ft_symbol_token(data, &i, &cur, data->linebuffer[cur]);
 		else
 		{
-			while (data->linebuffer[cur] && data->linebuffer[cur] != '\''
-				&& data->linebuffer[cur] != '\"'
-				&& ft_strchr("|><", data->linebuffer[cur]) == 0)
+			while (ft_strchr("|><", data->linebuffer[cur]) == 0
+				&& data->linebuffer[cur] != ' ')
 				cur++;
 			ft_add_token(data, i, cur);
 		}
+		while (data->linebuffer[cur] == ' ')
+			cur++;
 	}
 	ft_set_tokens_type(data);
 }

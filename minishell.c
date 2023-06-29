@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:33:00 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/06/27 19:45:51 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/06/29 19:36:08 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_print_tokens(&data); // To be removed
 		ft_clean_tokens(&data);
 	}
+	ft_free_str_array(data.envp);
 	rl_clear_history();
 	return (0);
 }

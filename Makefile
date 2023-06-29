@@ -1,5 +1,5 @@
 SRCS	=	minishell.c signal.c utils.c init_data.c parse_data.c \
-			parser.c cleaner.c
+			parser.c parser_fixer.c cleaner.c
 
 OBJS	=	${SRCS:.c=.o}
 
