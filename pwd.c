@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 18:00:45 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/06/29 12:32:06 by cmoran-l         ###   ########.fr       */
+/*   Created: 2023/06/29 19:16:20 by cmoran-l          #+#    #+#             */
+/*   Updated: 2023/06/29 19:17:00 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtins.h"
 
-static void	ft_sigint_handler()
+void	ft_built_pwd(void)
 {
-	write(1, "\n", 1);
-	rl_replace_line("", 1);
-	rl_on_new_line();
-	rl_redisplay();
-}
+	char	*cwd;
 
-void	ft_set_signal(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, ft_sigint_handler);
+	cwd = getcwd(NULL, 0);
+	if (cwd == NULL)
+		perror("pwd");
+	else
+	{
+		ft_putstr_fd(cwd, STDOUT_FILENO);
+		ft_putstr_fd("\n", STDOUT_FILENO);
+	}
+	free(cwd);
 }

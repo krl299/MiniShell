@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 18:00:45 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/06/29 12:32:06 by cmoran-l         ###   ########.fr       */
+/*   Created: 2023/06/29 19:30:17 by cmoran-l          #+#    #+#             */
+/*   Updated: 2023/06/29 19:43:15 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtins.h"
 
-static void	ft_sigint_handler()
+void	ft_built_env(t_data *data)
 {
-	write(1, "\n", 1);
-	rl_replace_line("", 1);
-	rl_on_new_line();
-	rl_redisplay();
-}
+	int	i;
 
-void	ft_set_signal(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, ft_sigint_handler);
+	i = 0;
+	while (data->envp[i])
+	{
+		printf("%s\n", data->envp[i]);
+		i++;
+	}
 }

@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 18:00:45 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/06/29 12:32:06 by cmoran-l         ###   ########.fr       */
+/*   Created: 2023/06/28 17:21:08 by cmoran-l          #+#    #+#             */
+/*   Updated: 2023/06/29 19:29:39 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_sigint_handler()
-{
-	write(1, "\n", 1);
-	rl_replace_line("", 1);
-	rl_on_new_line();
-	rl_redisplay();
-}
-
-void	ft_set_signal(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, ft_sigint_handler);
-}
+//Get the token type builting and identify what need to do.
+void	ft_built(t_data *data);
+//Get the current working directory and prints it to stdout.
+//If an error occurs, it prints the error to stderr.
+void	ft_built_pwd(void);
+//
+void	ft_built_echo(char **input);
+//
+void	ft_built_cd();
+//
+void	ft_built_export();
+//
+void	ft_built_unset();
+//
+void	ft_built_env(t_data *data);
+//
+void	ft_built_exit();
