@@ -6,55 +6,112 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:40:53 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/06/28 20:14:56 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/06/29 20:18:49 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_skip_spaces(const char *linebuffer, int *cur)
+void	ft_set_tokens_type(t_data *data)
 {
-	while (linebuffer[*cur] && linebuffer[*cur] == ' ')
-		(*cur)++;
-}
+	t_token	*tmp;
 
-void	ft_process_special_chars(t_data *data, int *i, int *cur)
-{
-	if (data->linebuffer[*cur] == '\'')
-		ft_process_quotes(data, i, cur, '\'');
-	else if (data->linebuffer[*cur] == '\"')
-		ft_process_quotes(data, i, cur, '\"');
-	else if (ft_strchr("|><", data->linebuffer[*cur]))
-		ft_symbol_token(data, i, cur, data->linebuffer[*cur]);
-}
-
-void	ft_process_regular_chars(t_data *data, int *i, int *cur)
-{
-	while (data->linebuffer[*cur] && data->linebuffer[*cur] != '\''
-		&& data->linebuffer[*cur] != '\"'
-		&& ft_strchr("|><", data->linebuffer[*cur]) == 0)
+	tmp = data->tokens;
+	while (tmp)
 	{
-		if (data->linebuffer[*cur] == ' ')
-		{
-			ft_add_token(data, *i, *cur);
-			while (data->linebuffer[*cur]
-				&& data->linebuffer[*cur] == ' ')
-				(*cur)++;
-			*i = *cur;
-		}
-		(*cur)++;
+		if (tmp->string[0] == '\'' && ft_strlen(tmp->string) > 1
+			&& tmp->string[ft_strlen(tmp->string) - 1] == '\'')
+			tmp->type = SINGLE_QUOTE;
+		else if (tmp->string[0] == '\"' && ft_strlen(tmp->string) > 1
+			&& tmp->string[ft_strlen(tmp->string) - 1] == '\"')
+			tmp->type = DOUBLE_QUOTE;
+		else if (tmp->string[0] == '<' && tmp->string[1] == '<')
+			tmp->type = HERE_DOC_RED;
+		else if (tmp->string[0] == '<')
+			tmp->type = IN_RED;
+		else if (tmp->string[0] == '>' && tmp->string[1] == '>')
+			tmp->type = APPEND_RED;
+		else if (tmp->string[0] == '>')
+			tmp->type = OUT_RED;
+		else if (tmp->string[0] == '|')
+			tmp->type = PIPE;
+		else
+			tmp->type = NO_QUOTE;
+		tmp = tmp->next;
 	}
-	ft_add_token(data, *i, *cur);
 }
 
-void	ft_trim_spaces(char *str)
+void	ft_add_token(t_data *data, int i, int cur)
 {
+	t_token	*new;
+	t_token	*tmp;
+	char	*str;
+
+	str = ft_substr(data->linebuffer, i, cur - i);
+	new = malloc(sizeof(t_token));
+	if (!new)
+		return ;
+	new->string = str;
+	new->type = 0;
+	new->next = NULL;
+	new->prev = NULL;
+	if (!data->tokens)
+		data->tokens = new;
+	else
+	{
+		tmp = data->tokens;
+		while (tmp->next)
+			tmp = tmp->next;
+		new->prev = tmp;
+		tmp->next = new;
+	}
+}
+
+void	ft_process_quotes(t_data *data, int *iter, int *curr, char quote)
+{
+	int	cur;
+	int	i;
+	int	aux;
+
+	cur = *curr;
+	i = *iter;
+	aux = cur;
+	cur++;
+	while (data->linebuffer[cur] && data->linebuffer[cur] != quote)
+		cur++;
+	if (data->linebuffer[cur] == quote)
+		cur++;
+	else
+	{
+		cur = aux;
+		while (data->linebuffer[cur] && data->linebuffer[cur] != ' ')
+			cur++;
+	}
+	ft_add_token(data, i, cur);
+	*curr = cur;
+}
+
+void	ft_symbol_token(t_data *data, int *iter, int *curr, char symbol)
+{
+	int	cur;
 	int	i;
 
-	i = ft_strlen(str) - 1;
-	while (str[i] == ' ')
-		i--;
-	str[i + 1] = '\0';
+	cur = *curr;
+	i = *iter;
+	cur++;
+	if (data->linebuffer[cur] == symbol && symbol != '|')
+		cur++;
+	if (symbol == '>' || symbol == '<')
+	{
+		while (data->linebuffer[cur] == ' ')
+			cur++;
+		while (data->linebuffer[cur]
+			&& ft_strchr("|><", data->linebuffer[cur]) == 0
+			&& data->linebuffer[cur] != ' ')
+			cur++;
+	}
+	ft_add_token(data, i, cur);
+	*curr = cur;
 }
 
 void	ft_parse_data(t_data *data)
@@ -63,13 +120,24 @@ void	ft_parse_data(t_data *data)
 	int	i;
 
 	cur = 0;
-	ft_trim_spaces(data->linebuffer);
 	while (data->linebuffer[cur])
 	{
+		while (data->linebuffer[cur] == ' ')
+			cur++;
 		i = cur;
-		ft_skip_spaces(data->linebuffer, &cur);
-		ft_process_special_chars(data, &i, &cur);
-		ft_process_regular_chars(data, &i, &cur);
+		if (data->linebuffer[cur] == '\'' || data->linebuffer[cur] == '\"')
+			ft_process_quotes(data, &i, &cur, data->linebuffer[cur]);
+		else if (ft_strchr("|><", data->linebuffer[cur]))
+			ft_symbol_token(data, &i, &cur, data->linebuffer[cur]);
+		else
+		{
+			while (ft_strchr("|><", data->linebuffer[cur]) == 0
+				&& data->linebuffer[cur] != ' ')
+				cur++;
+			ft_add_token(data, i, cur);
+		}
+		while (data->linebuffer[cur] == ' ')
+			cur++;
 	}
 	ft_set_tokens_type(data);
 }

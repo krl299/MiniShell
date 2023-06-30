@@ -43,6 +43,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_built(&data);
 		ft_clean_tokens(&data);
 	}
+	ft_free_str_array(data.envp);
 	rl_clear_history();
 	return (0);
 }
