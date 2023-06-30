@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:34:23 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/06/29 18:41:43 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/06/30 18:26:18 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,10 @@ int		ft_is_builtin(char *str);
 void	ft_create_tokens(t_data *data);
 
 // PARSER_FIXER.C
-void	ft_fix_tokens(t_data *data);
+void	ft_fix_blanks_in_tokens(t_data *data);
 void	ft_set_builtins(t_data *data);
+void	ft_delete_quotes(t_data *data);
+void	ft_set_env_variables(t_data *data);
 
 // PARSE_DATA.C
 void	ft_parse_data(t_data *data);

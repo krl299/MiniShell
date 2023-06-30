@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:42:13 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/06/29 19:40:00 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/06/30 18:27:13 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ void	ft_create_tokens(t_data *data)
 {
 	ft_parse_data(data);
 	ft_set_builtins(data);
-	ft_fix_tokens(data);
+	ft_fix_blanks_in_tokens(data);
+	ft_delete_quotes(data);
+	ft_set_env_variables(data);
 }
