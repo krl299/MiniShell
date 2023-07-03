@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmatas-p <jmatas-p@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 19:20:48 by jmatas-p          #+#    #+#             */
-/*   Updated: 2022/09/26 19:26:31 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/03 15:52:24 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_itoa(int n)
 		x[0] = '0';
 	if (n < 0)
 	{
-		sign *= -1;
+		sign = sign * -1;
 		number = n * -1;
 		x[0] = '-';
 	}
