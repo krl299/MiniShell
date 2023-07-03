@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:17:40 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/03 15:05:35 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/03 17:34:59 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	ft_count_args(t_token *tokens)
 
 	i = 0;
 	aux = tokens;
-	while (aux->next != NULL && aux->next->type == NO_QUOTE)
+	while (aux->next != NULL && (aux->next->type == NO_QUOTE || \
+			aux->next->type == SINGLE_QUOTE || aux->next->type == DOUBLE_QUOTE))
 	{
 		i++;
 		aux = aux->next;
