@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:17:40 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/03 17:34:59 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:37:56 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	**ft_create_args(t_token *tokens)
 	int		i;
 
 	count_args = ft_count_args(tokens);
-	args = malloc(sizeof(char **) * count_args);
+	args = malloc(sizeof(char **) * count_args + 1);
 	aux = tokens->next;
 	i = 0;
 	while (aux && count_args > 0)
@@ -46,6 +46,7 @@ static char	**ft_create_args(t_token *tokens)
 		i++;
 		count_args--;
 	}
+	args[i] = NULL;
 	return (args);
 }
 
