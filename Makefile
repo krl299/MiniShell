@@ -1,6 +1,8 @@
-SRCS	=	minishell.c signal.c utils.c init_data.c parse_data.c \
-			parser.c cleaner.c parser_fixer.c builtins.c pwd.c\
-			echo.c env.c
+SRCS	=	./src/minishell.c			./src/signal.c				./src/utils.c			\
+			./src/parser/init_data.c	./src/parser/parse_data.c	./src/parser/parser.c	\
+			./src/parser/cleaner.c		./src/parser/parser_fixer.c \
+			./src/builtins/builtins.c	./src/builtins/pwd.c		./src/builtins/echo.c	\
+			./src/builtins/env.c 
 
 OBJS	=	${SRCS:.c=.o}
 
@@ -24,7 +26,6 @@ RL_LIB_LINK	=	-L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 all:	libft	$(NAME)
 
 libft:	
-		git submodule update --init
 		make -C libft
 
 $(NAME):	${OBJS}

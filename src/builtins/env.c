@@ -6,11 +6,11 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 19:30:17 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/06/29 19:43:15 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/03 15:06:12 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "../../includes/minishell.h"
 
 void	ft_built_env(t_data *data)
 {

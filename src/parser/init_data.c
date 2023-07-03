@@ -6,11 +6,11 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:06:10 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/06/27 16:18:32 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/03 15:07:36 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 void	ft_copy_envp(t_data *data, char **envp)
 {

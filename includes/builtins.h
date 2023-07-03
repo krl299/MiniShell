@@ -6,11 +6,13 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:21:08 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/06/29 19:29:39 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/03 15:32:03 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef BUILTINS_H
+# define BUILTINS_H
+# include "parser.h"
 
 //Get the token type builting and identify what need to do.
 void	ft_built(t_data *data);
@@ -29,3 +31,4 @@ void	ft_built_unset();
 void	ft_built_env(t_data *data);
 //
 void	ft_built_exit();
+#endif

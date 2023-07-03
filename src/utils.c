@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/29 19:16:20 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/06/29 19:17:00 by cmoran-l         ###   ########.fr       */
+/*   Created: 2023/06/16 11:11:31 by cmoran-l          #+#    #+#             */
+/*   Updated: 2023/07/03 15:32:23 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "../includes/minishell.h"
 
-void	ft_built_pwd(void)
+int	ft_empty_line(const char *str)
 {
-	char	*cwd;
+	int	i;
 
-	cwd = getcwd(NULL, 0);
-	if (cwd == NULL)
-		perror("pwd");
-	else
+	i = 0;
+	while (str[i])
 	{
-		ft_putstr_fd(cwd, STDOUT_FILENO);
-		ft_putstr_fd("\n", STDOUT_FILENO);
+		if (str[i] == ' ' || str[i] == '\t')
+			i++;
+		else
+			return (1);
 	}
-	free(cwd);
+	return (0);
 }

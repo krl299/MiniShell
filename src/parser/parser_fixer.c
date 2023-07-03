@@ -6,11 +6,11 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 18:17:57 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/06/30 18:48:51 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/03 15:07:21 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 void	ft_fix_blanks_in_tokens(t_data *data)
 {

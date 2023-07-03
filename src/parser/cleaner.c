@@ -6,11 +6,11 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 19:36:42 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/06/29 19:35:19 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/03 15:06:42 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 void	ft_clean_token_list(t_token *tokens)
 {
