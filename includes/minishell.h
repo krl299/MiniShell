@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:34:23 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/03 14:45:46 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/04 20:32:51 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ void	ft_set_signal(void);
 
 //	UTILS.C
 int		ft_empty_line(const char *str);
+int     ft_is_inter(char *str);
+int     ft_is_only_dollar(char *str);
 
 #endif

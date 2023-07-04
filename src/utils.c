@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:11:31 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/03 15:32:23 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/04 20:36:32 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,15 @@ int	ft_empty_line(const char *str)
 			return (1);
 	}
 	return (0);
+}
+
+int	ft_is_inter(char *str)
+{
+	int len;
+	
+	len = ft_strlen(str);
+	if (len == 2 && str[0] == '$' && str[1] == '?') {
+        return 1;
+    }
+    return 0;
 }

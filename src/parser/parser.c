@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:42:13 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/07/03 15:07:27 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/04 20:36:26 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	ft_format_env(t_data *data)
+{
+	t_token	*aux;
+
+	aux = data->tokens;
+	while (aux)
+	{
+		while ((aux->type == 0 || aux->type == 2)
+			&& ft_strchr(aux->string, '$'))
+				ft_replace_var(aux, data);
+		aux = aux->next;
+	}
+}
 
 void	ft_print_tokens(t_data *data)
 {
@@ -38,5 +52,5 @@ void	ft_create_tokens(t_data *data)
 	ft_set_builtins(data);
 	ft_fix_blanks_in_tokens(data);
 	ft_delete_quotes(data);
-	ft_set_env_variables(data);
+	ft_format_env(data);
 }

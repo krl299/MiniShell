@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:06:10 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/07/03 15:07:36 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/04 18:21:18 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_copy_envp(t_data *data, char **envp)
 void	ft_init_data(t_data *data, int argc, char **argv, char **envp)
 {
 	data->argc = argc;
+	data->id_last_proc = 0;
 	data->argv = argv;
 	data->linebuffer = NULL;
 	data->tokens = NULL;

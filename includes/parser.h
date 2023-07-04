@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:26:46 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/03 15:30:34 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/04 18:27:45 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_token
 typedef struct s_data
 {
 	int		argc;
+	int		id_last_proc;
 	char	**argv;
 	char	**envp;
 	char	*linebuffer;
@@ -60,6 +61,9 @@ void	ft_set_env_variables(t_data *data);
 
 // PARSE_DATA.C
 void	ft_parse_data(t_data *data);
+
+// PARSER_ENV.C
+void	ft_replace_var(t_token *input, t_data *data);
 
 // CLEANER.C
 void	ft_clean_tokens(t_data *data);
