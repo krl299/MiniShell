@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:17:40 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/03 18:37:56 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/04 19:48:06 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_built(t_data *data)
 	}
 	else if (ft_strcmp(data->tokens->string, "unset") == 0)
 	{
-
+		ft_built_unset(data);
 	}
 	else if (ft_strcmp(data->tokens->string, "env") == 0)
 	{

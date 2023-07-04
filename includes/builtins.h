@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:21:08 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/03 15:32:03 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/04 19:46:15 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_built_cd();
 //
 void	ft_built_export();
 //
-void	ft_built_unset();
+void	ft_built_unset(t_data *data);
 //
 void	ft_built_env(t_data *data);
 //
