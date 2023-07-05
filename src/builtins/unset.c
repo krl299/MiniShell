@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:40:03 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/05 12:49:54 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/05 17:32:21 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,29 @@ static int	ft_env_len(char **envp)
 
 	i = 0;
 	while (envp[i])
-	{
 		i++;
-	}
 	return (i);
+}
+
+static char	*ft_get_envp_var(char *envp)
+{
+	int		i;
+	char	*str;
+
+	i = 0;
+	while (envp[i] != '=')
+		i++;
+	str = malloc(sizeof(char) * i + 1);
+	if (!str)
+	{
+		ft_putstr_fd("Error: malloc failed\n", STDERR_FILENO);
+		return (NULL);
+	}
+	i = -1;
+	while (envp[++i] != '=')
+		str[i] = envp[i];
+	str[i] = '\0';
+	return (str);
 }
 
 static char	**ft_cpy_env_less_one(char **envp, char **new_envp, int x)
@@ -50,18 +69,21 @@ void	ft_built_unset(t_data *data)
 	int		list_len;
 	char	**new_envp;
 	char	*arg;
+	char	*envp_str;
 
 	i = 0;
 	list_len = ft_env_len(data->envp);
 	arg = data->tokens->next->string;
 	while (data->envp[i])
 	{
-		if(ft_strncmp(data->envp[i], arg, ft_strlen(arg) - 1) == 0)
+		envp_str = ft_get_envp_var(data->envp[i]);
+		if(ft_strcmp(envp_str, arg) == 0)
 		{
 			new_envp = malloc(sizeof(char **) * list_len - 1);
 			data->envp = ft_cpy_env_less_one(data->envp, new_envp, i);
 			break;
 		}
+		free(envp_str);
 		i++;
 	}
 }
