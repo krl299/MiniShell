@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:42:13 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/07/04 20:36:26 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/05 19:38:11 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	ft_format_env(t_data *data)
 	{
 		while ((aux->type == 0 || aux->type == 2)
 			&& ft_strchr(aux->string, '$'))
-				ft_replace_var(aux, data);
+			if (!ft_replace_var(aux, data))
+				break ;
 		aux = aux->next;
 	}
 }

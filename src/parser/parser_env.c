@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 18:14:18 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/07/04 20:33:52 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/05 19:43:28 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	ft_replace_env(t_token *token, int s, int e, char *value)
 	token->string = new;
 }
 
-void	ft_replace_var(t_token *token, t_data *data)
+int	ft_replace_var(t_token *token, t_data *data)
 {
 	int		s;
 	int		e;
@@ -97,7 +97,7 @@ void	ft_replace_var(t_token *token, t_data *data)
 	e = 0;
     while (token->string[e] && token->string[e] != '$')
         e++;
-    if (token->string[e] == '$')
+    if (token->string[e] == '$' && token->string[e + 1])
     {
         e++;
         s = e;
@@ -115,5 +115,7 @@ void	ft_replace_var(t_token *token, t_data *data)
         ft_replace_env(token, s - 1, s + ft_strlen(env), value);
         free(env);
         free(value);
+		return (1);
     }
+	return (0);
 }

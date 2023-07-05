@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:26:46 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/04 18:27:45 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/05 19:38:49 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_set_env_variables(t_data *data);
 void	ft_parse_data(t_data *data);
 
 // PARSER_ENV.C
-void	ft_replace_var(t_token *input, t_data *data);
+int	ft_replace_var(t_token *input, t_data *data);
 
 // CLEANER.C
 void	ft_clean_tokens(t_data *data);
