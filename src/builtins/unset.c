@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:40:03 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/04 20:15:21 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/05 12:49:54 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@ static int	ft_env_len(char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		//printf("%s\n", envp[i]);
 		i++;
 	}
 	return (i);
 }
 
-static void	ft_cpy_env_less_one(char **envp, char **new_envp, int x)
+static char	**ft_cpy_env_less_one(char **envp, char **new_envp, int x)
 {
 	int i;
 	int j;
@@ -38,12 +37,11 @@ static void	ft_cpy_env_less_one(char **envp, char **new_envp, int x)
 	{
 		if (i == x)
 			i++;
-		printf("aux[%d] = %s\n", i, aux[i]);
 		new_envp[j] = aux[i];
-		printf("new_env[%d] = %s\n", j, new_envp[j]);
 		j++;
 		i++;
 	}
+	return (new_envp);
 }
 
 void	ft_built_unset(t_data *data)
@@ -55,16 +53,13 @@ void	ft_built_unset(t_data *data)
 
 	i = 0;
 	list_len = ft_env_len(data->envp);
-//	printf("%d\n", list_len);
-	arg = data->tokens->string;
+	arg = data->tokens->next->string;
 	while (data->envp[i])
 	{
-		printf("%lu\n", ft_strlen(arg));
 		if(ft_strncmp(data->envp[i], arg, ft_strlen(arg) - 1) == 0)
 		{
-			printf("encontre envp\n");
 			new_envp = malloc(sizeof(char **) * list_len - 1);
-			ft_cpy_env_less_one(data->envp, new_envp, i);
+			data->envp = ft_cpy_env_less_one(data->envp, new_envp, i);
 			break;
 		}
 		i++;
