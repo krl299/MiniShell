@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:40:03 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/05 17:32:21 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/06 13:42:21 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ft_env_len(char **envp)
 	return (i);
 }
 
-static char	*ft_get_envp_var(char *envp)
+char	*ft_get_var(char *envp)
 {
 	int		i;
 	char	*str;
@@ -76,7 +76,7 @@ void	ft_built_unset(t_data *data)
 	arg = data->tokens->next->string;
 	while (data->envp[i])
 	{
-		envp_str = ft_get_envp_var(data->envp[i]);
+		envp_str = ft_get_var(data->envp[i]);
 		if(ft_strcmp(envp_str, arg) == 0)
 		{
 			new_envp = malloc(sizeof(char **) * list_len - 1);

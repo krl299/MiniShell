@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:17:40 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/04 19:48:06 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/06 15:57:14 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void	ft_built(t_data *data)
 	}
 	else if (ft_strcmp(data->tokens->string, "export") == 0)
 	{
-
+		printf("doing export\n");
+		ft_built_export(data);
 	}
 	else if (ft_strcmp(data->tokens->string, "unset") == 0)
 	{
