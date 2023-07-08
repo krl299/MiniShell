@@ -2,7 +2,8 @@ SRCS	=	./src/minishell.c			./src/signal.c				./src/utils.c			\
 			./src/parser/init_data.c	./src/parser/parse_data.c	./src/parser/parser.c	\
 			./src/parser/cleaner.c		./src/parser/parser_fixer.c	./src/parser/parser_env.c  \
 			./src/builtins/builtins.c	./src/builtins/pwd.c		./src/builtins/echo.c	\
-			./src/builtins/env.c		./src/builtins/unset.c		./src/builtins/export.c 
+			./src/builtins/env.c		./src/builtins/unset.c		./src/builtins/export.c \
+			./src/builtins/cd.c
 
 OBJS	=	${SRCS:.c=.o}
 
