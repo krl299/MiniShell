@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 19:20:01 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/03 18:38:06 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/08 19:57:44 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void	ft_built_echo(char **input)
 	while (input[i])
 	{
 		ft_putstr_fd(input[i], STDOUT_FILENO);
-		if (input[i + 1])
-			ft_putstr_fd(" ", STDOUT_FILENO);
 		i++;
 	}
 	if (flag == 0)

@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:17:40 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/08 17:54:45 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/08 20:08:15 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ static char	**ft_create_args(t_token *tokens)
 	i = 0;
 	while (aux && count_args > 0)
 	{
-		args[i] = aux->string;
+		if (i != 0 && aux->has_space == 1)
+			args[i] = ft_strjoin(" ", aux->string);
+		else
+			args[i] = aux->string;
 		aux = aux->next;
 		i++;
 		count_args--;
@@ -60,7 +63,7 @@ void	ft_built(t_data *data)
 	{
 		args = ft_create_args(data->tokens);
 		ft_built_echo(args);
-		free(args);
+		ft_free_str_array(args);
 	}
 	else if (ft_strcmp(data->tokens->string, "cd") == 0)
 	{
