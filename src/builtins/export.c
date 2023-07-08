@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 17:53:18 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/06 17:54:49 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/08 19:11:10 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static int	ft_update_env(t_data *data)
 	char	*var_input;
 
 	i = 0;
-	var_input = ft_get_var(data->tokens->next->string);
+	var_input = ft_get_env_var(data->tokens->next->string);
 	while (data->envp[i])
 	{
-		var_envp = ft_get_var(data->envp[i]);
+		var_envp = ft_get_env_var(data->envp[i]);
 		if (ft_strcmp(var_envp, var_input) == 0)
 		{
 			free(data->envp[i]);
