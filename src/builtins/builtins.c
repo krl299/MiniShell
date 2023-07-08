@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:17:40 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/03 15:05:35 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/06 15:57:14 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	ft_count_args(t_token *tokens)
 
 	i = 0;
 	aux = tokens;
-	while (aux->next != NULL && aux->next->type == NO_QUOTE)
+	while (aux->next != NULL && (aux->next->type == NO_QUOTE || \
+			aux->next->type == SINGLE_QUOTE || aux->next->type == DOUBLE_QUOTE))
 	{
 		i++;
 		aux = aux->next;
@@ -35,7 +36,7 @@ static char	**ft_create_args(t_token *tokens)
 	int		i;
 
 	count_args = ft_count_args(tokens);
-	args = malloc(sizeof(char **) * count_args);
+	args = malloc(sizeof(char **) * count_args + 1);
 	aux = tokens->next;
 	i = 0;
 	while (aux && count_args > 0)
@@ -45,6 +46,7 @@ static char	**ft_create_args(t_token *tokens)
 		i++;
 		count_args--;
 	}
+	args[i] = NULL;
 	return (args);
 }
 
@@ -66,11 +68,12 @@ void	ft_built(t_data *data)
 	}
 	else if (ft_strcmp(data->tokens->string, "export") == 0)
 	{
-
+		printf("doing export\n");
+		ft_built_export(data);
 	}
 	else if (ft_strcmp(data->tokens->string, "unset") == 0)
 	{
-
+		ft_built_unset(data);
 	}
 	else if (ft_strcmp(data->tokens->string, "env") == 0)
 	{
