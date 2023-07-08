@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmatas-p <jmatas-p@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 18:14:18 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/07/05 19:43:28 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/08 18:05:02 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ char	*ft_get_env(char *input, t_data *data)
 	char	*tmp;
 
 	c = 0;
-    //ft_printf("%s\n", input);
 	while (data->envp[c])
 	{
 		env = ft_get_env_var(data->envp[c]);
