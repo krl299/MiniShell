@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:26:46 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/08 18:07:12 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/08 18:12:23 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ enum e_datatype
 	IN_RED,
 	OUT_RED,
 	APPEND_RED,
-	HERE_DOC_RED,
-	ARGUMENT
+	HERE_DOC_RED
 };
 
 typedef struct s_token
