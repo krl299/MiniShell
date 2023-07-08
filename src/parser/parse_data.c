@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:40:53 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/07/03 15:07:32 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/08 18:04:57 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	ft_add_token(t_data *data, int i, int cur)
 	if (!new)
 		return ;
 	new->string = str;
+	new->has_space = ft_check_space(data, i);
 	new->type = 0;
 	new->next = NULL;
 	new->prev = NULL;
@@ -131,8 +132,7 @@ void	ft_parse_data(t_data *data)
 			ft_symbol_token(data, &i, &cur, data->linebuffer[cur]);
 		else
 		{
-			while (ft_strchr("|><", data->linebuffer[cur]) == 0
-				&& data->linebuffer[cur] != ' ')
+			while (ft_strchr("|>< \'\"", data->linebuffer[cur]) == 0)
 				cur++;
 			ft_add_token(data, i, cur);
 		}

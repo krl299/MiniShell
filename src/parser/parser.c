@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmatas-p <jmatas-p@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:42:13 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/07/05 19:38:11 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/08 18:05:20 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	ft_check_space(t_data *data, int cur)
+{
+	if (cur == 0)
+		return (0);
+	if (data->linebuffer[cur - 1] == ' ')
+		return (1);
+	return (0);
+}
 
 void	ft_format_env(t_data *data)
 {
@@ -36,6 +45,7 @@ void	ft_print_tokens(t_data *data)
 	{
 		printf("string: [%s]\n", tmp->string);
 		printf("type: %d\n", tmp->type);
+		printf("has_space: %d\n", tmp->has_space);
 		tmp = tmp->next;
 	}
 }
