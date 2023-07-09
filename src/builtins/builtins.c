@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:17:40 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/09 16:34:29 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/09 19:59:38 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	**ft_create_args(t_token *tokens)
 	i = 0;
 	while (aux && count_args > 0)
 	{
-		if (i != 0 && aux->has_space == 1)
+		if (i != 0 && !ft_is_n(aux->prev->string) && aux->has_space == 1)
 			args[i] = ft_strjoin(" ", aux->string);
 		else
 			args[i] = aux->string;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 19:20:01 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/08 19:57:44 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/09 19:55:24 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	ft_is_n(char *str)
+int	ft_is_n(char *str)
 {
 	int	i;
 

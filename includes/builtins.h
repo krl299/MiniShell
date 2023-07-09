@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:21:08 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/08 19:09:20 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/09 19:55:21 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_built(t_data *data);
 //If an error occurs, it prints the error to stderr.
 void	ft_built_pwd(void);
 //
+int	    ft_is_n(char *str);
 void	ft_built_echo(char **input);
 //
 void	ft_built_cd();
