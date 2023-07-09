@@ -1,0 +1,99 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   processor.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/09 16:50:30 by jmatas-p          #+#    #+#             */
+/*   Updated: 2023/07/09 19:21:18 by jmatas-p         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/minishell.h"
+
+void	ft_error(char *path, int outfd)
+{
+	dup2(STDOUT_FILENO, outfd);
+	if (ft_strnstr(path, "./", 3) != 0 || ft_strnstr(path, "/", 2) != 0)
+		perror(path);
+	else
+	{
+		ft_putstr_fd(path, STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
+		ft_putstr_fd("command not found \n", STDERR_FILENO);
+	}
+}
+
+int	ft_get_tokens_count(t_data *data)
+{
+	int		i;
+	t_token	*tmp;
+
+	tmp = data->tokens;
+	i = 0;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return (i);
+}
+
+char	**ft_create_argv(t_data *data)
+{
+	int		i;
+	char	**argv;
+	t_token	*aux;
+
+	i = ft_get_tokens_count(data);
+	argv = (char **)malloc(sizeof(char *) * (i + 1));
+	if (!argv)
+		ft_error("malloc", STDERR_FILENO);
+	i = 0;
+	aux = data->tokens;
+	while (aux)
+	{
+		argv[i] = ft_strdup(aux->string);
+		aux = aux->next;
+		i++;
+	}
+	argv[i] = NULL;
+	return (argv);
+}
+
+void	ft_execve(t_data *data)
+{
+	pid_t	pid;
+	int		status;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		ft_execute_from_path(data);
+		if (execve(data->tokens_str[0], data->tokens_str, data->envp) == -1)
+			ft_error(data->tokens[0].string, STDOUT_FILENO);
+		ft_clean_exit(EXIT_FAILURE, data);
+	}
+	else if (pid < 0)
+		perror(data->tokens_str[0]);
+	else
+	{
+		waitpid(pid, &status, WUNTRACED);
+		if (pid > 0)
+		{
+			if (WIFEXITED(status))
+				data->id_last_proc = WEXITSTATUS(status);
+		}
+	}
+}
+
+void	ft_process_commands(t_data *data)
+{
+	data->tokens_str = ft_create_argv(data);
+	if (data->tokens[0].type == BUILTINS)
+		ft_built(data);
+	else
+		ft_execve(data);
+	ft_free_str_array(data->tokens_str);
+}
