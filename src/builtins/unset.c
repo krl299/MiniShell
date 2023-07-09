@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:40:03 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/09 17:40:29 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/09 19:35:22 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static char	**ft_cpy_env_less_one(char **envp, int x)
 {
-	int 	i;
-	int 	j;
+	int i;
+	int j;
 	char	**new_envp;
 
 	i = 0;
@@ -27,12 +27,19 @@ static char	**ft_cpy_env_less_one(char **envp, int x)
 	while (envp[i])
 	{
 		if (i == x)
+		{
+			free(envp[i]);
 			i++;
-		new_envp[j] = ft_strdup(envp[i]);
-		j++;
-		i++;
+		}
+		else
+		{
+			new_envp[j] = envp[i];
+			j++;
+			i++;
+		}
 	}
-	ft_free_str_array(envp);
+	new_envp[j] = NULL;
+	free(envp);
 	return (new_envp);
 }
 
@@ -43,13 +50,21 @@ void	ft_built_unset(t_data *data)
 	char	*envp_str;
 
 	i = 0;
-	arg = data->tokens->next->string;
-	while (data->envp[i])
+	if (data->tokens->next)
 	{
-		envp_str = ft_get_env_var(data->envp[i]);
-		if(ft_strcmp(envp_str, arg) == 0)
-			data->envp = ft_cpy_env_less_one(data->envp, i);
-		free(envp_str);
-		i++;
+		arg = data->tokens->next->string;
+		while (data->envp[i])
+		{
+			envp_str = ft_get_env_var(data->envp[i]);
+			if(ft_strcmp(envp_str, arg) == 0)
+			{
+				data->envp = ft_cpy_env_less_one(data->envp, i);
+				free(envp_str);
+				break;
+			}
+			free(envp_str);
+			i++;
+		
+		}
 	}
 }
