@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmatas-p <jmatas-p@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:34:23 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/05 15:18:45 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/09 16:55:49 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include "../libft/libft.h"
 # include "builtins.h"
 # include "parser.h"
+# include "pipeline.h"
 
 //	SIGNAL.C
 void	ft_set_signal(void);
