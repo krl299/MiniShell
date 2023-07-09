@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 17:40:47 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/08 19:37:53 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/09 17:05:04 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ static void	ft_update_env(t_data *data, char *input)
 		if (ft_strcmp(var_envp, var_input) == 0)
 		{
 			free(data->envp[i]);
-			free(var_envp);
-			free(var_input);
 			data->envp[i] = ft_strdup(input);
-			return ;
 		}
 		free(var_envp);
 		i++;
@@ -42,15 +39,21 @@ static void	ft_update_cd(t_data *data)
 //	OLDPWD = PWD > PWD = NEW_PWD
 	char	*new_pwd;
 	char	*old_pwd;
+	char	*value_new_pwd;
+	char	*value_old_pwd;
 
 	new_pwd = "PWD=";
 	old_pwd = "OLDPWD=";
-	new_pwd = ft_strjoin(new_pwd, getcwd(NULL,0));
-	old_pwd = ft_strjoin(old_pwd, ft_get_env("PWD", data));
+	value_new_pwd = getcwd(NULL, 0);
+	value_old_pwd = ft_get_env("PWD", data);
+	new_pwd = ft_strjoin(new_pwd, value_new_pwd);
+	old_pwd = ft_strjoin(old_pwd, value_old_pwd);
 	ft_update_env(data, new_pwd);
 	ft_update_env(data, old_pwd);
 	free(new_pwd);
 	free(old_pwd);
+	free(value_new_pwd);
+	free(value_old_pwd);
 }
 
 void	ft_built_cd(t_data *data)

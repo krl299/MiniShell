@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:17:40 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/08 20:08:15 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/09 16:34:29 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_built(t_data *data)
 	{
 		args = ft_create_args(data->tokens);
 		ft_built_echo(args);
-		ft_free_str_array(args);
+		free(args);
 	}
 	else if (ft_strcmp(data->tokens->string, "cd") == 0)
 	{
