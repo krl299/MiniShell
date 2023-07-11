@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 19:20:01 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/11 17:07:42 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/11 18:38:02 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_is_n(char *str)
 	int	i;
 
 	i = 0;
-	if (str[i] && str[i] == '-')
+	if (str[i] && str[i] == '-' && str[i + 1] == 'n')
 	{
 		while (str[++i])
 		{
@@ -30,24 +30,30 @@ int	ft_is_n(char *str)
 		return (0);
 }
 
-void	ft_built_echo(char **input)
+void	ft_built_echo(t_token *tokens)
 {
-	int	i;
-	int	flag;
+	int		flag;
+	t_token	*aux;
+	int		first;
 
-	i = 0;
 	flag = 0;
-	if (input[i] && ft_is_n(input[i]) == 1)
+	first = 1;
+	aux = tokens->next;
+	if (aux && ft_is_n(aux->string) == 1)
 	{
 		flag = 1;
-		i++;
+		aux = aux->next;
 	}
-	while (input[i] && ft_is_n(input[i]) == 1)
-		i++;
-	while (input[i])
+	while (aux->string && ft_is_n(aux->string) == 1)
+		aux = aux->next;
+	while (aux)
 	{
-		ft_putstr_fd(input[i], STDOUT_FILENO);
-		i++;
+		if (first == 0)
+			if (aux->has_space == 1)
+				ft_putstr_fd(" ", STDOUT_FILENO);
+		first = 0;
+		ft_putstr_fd(aux->string, STDOUT_FILENO);
+		aux = aux->next;
 	}
 	if (flag == 0)
 		ft_putstr_fd("\n", STDOUT_FILENO);
