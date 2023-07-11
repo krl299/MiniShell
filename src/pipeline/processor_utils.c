@@ -6,13 +6,13 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 18:26:19 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/07/09 18:52:35 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/11 16:13:59 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*ft_pathfinder(t_data *data)
+char	*ft_get_path(t_data *data)
 {
 	char	*path;
 
@@ -22,13 +22,13 @@ char	*ft_pathfinder(t_data *data)
 	return (path);
 }
 
-void	ft_execute_from_path(t_data *data)
+void	ft_replace_path(t_data *data)
 {
 	char	*aux;
 	char	**paths;
 	int		c;
 
-	aux = ft_pathfinder(data);
+	aux = ft_get_path(data);
 	paths = ft_split(aux, ':');
 	c = 0;
 	if (ft_strcmp(aux, "") != 0)

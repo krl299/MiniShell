@@ -4,6 +4,7 @@ SRCS	=	./src/minishell.c			./src/signal.c				./src/utils.c			\
 			./src/builtins/builtins.c	./src/builtins/pwd.c		./src/builtins/echo.c	\
 			./src/builtins/env.c		./src/builtins/unset.c		./src/builtins/export.c \
 			./src/builtins/cd.c			./src/pipeline/processor.c	./src/pipeline/processor_utils.c \
+			./src/builtins/exit.c
 
 OBJS	=	${SRCS:.c=.o}
 

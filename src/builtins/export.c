@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 17:53:18 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/09 17:20:32 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/11 17:21:19 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	**ft_add_env(t_data *data, char *input)
 	i = 0;
 	while (data->envp[i])
 		i++;
-	new_envp = malloc(sizeof(char *) * (i + 1));
+	new_envp = malloc(sizeof(char *) * (i + 2));
 	if (!new_envp)
 		ft_putstr_fd("Error: malloc failed\n", STDERR_FILENO);
 	i = -1;

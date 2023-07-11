@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 16:50:30 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/07/09 19:21:18 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/11 16:13:12 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_execve(t_data *data)
 	pid = fork();
 	if (pid == 0)
 	{
-		ft_execute_from_path(data);
+		ft_replace_path(data);
 		if (execve(data->tokens_str[0], data->tokens_str, data->envp) == -1)
 			ft_error(data->tokens[0].string, STDOUT_FILENO);
 		ft_clean_exit(EXIT_FAILURE, data);
