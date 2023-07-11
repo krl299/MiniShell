@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:17:40 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/09 19:59:38 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/11 16:17:30 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ void	ft_built(t_data *data)
 	}
 	else if (ft_strcmp(data->tokens->string, "exit") == 0)
 	{
-
+		ft_built_exit(data);
 	}
 }
