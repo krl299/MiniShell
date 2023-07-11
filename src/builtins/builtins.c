@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:17:40 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/09 19:59:38 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/11 17:05:37 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ static char	**ft_create_args(t_token *tokens)
 	i = 0;
 	while (aux && count_args > 0)
 	{
-		if (i != 0 && !ft_is_n(aux->prev->string) && aux->has_space == 1)
+		if (i == 1 && ft_is_n(aux->prev->string) && aux->has_space == 1)
+			args[i] = ft_strjoin("", aux->string);
+		else if (i != 0 && aux->has_space == 1)
 			args[i] = ft_strjoin(" ", aux->string);
 		else
-			args[i] = aux->string;
+			args[i] = ft_strjoin("",  aux->string);
 		aux = aux->next;
 		i++;
 		count_args--;
@@ -63,7 +65,7 @@ void	ft_built(t_data *data)
 	{
 		args = ft_create_args(data->tokens);
 		ft_built_echo(args);
-		free(args);
+		ft_free_str_array(args);
 	}
 	else if (ft_strcmp(data->tokens->string, "cd") == 0)
 	{
@@ -83,6 +85,6 @@ void	ft_built(t_data *data)
 	}
 	else if (ft_strcmp(data->tokens->string, "exit") == 0)
 	{
-
+		ft_built_exit(data);
 	}
 }
