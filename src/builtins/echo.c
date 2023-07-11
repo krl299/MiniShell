@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 19:20:01 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/09 19:55:24 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/11 17:00:22 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_built_echo(char **input)
 	while (input[i])
 	{
 		ft_putstr_fd(input[i], STDOUT_FILENO);
+//		free(input[i]);
 		i++;
 	}
 	if (flag == 0)
