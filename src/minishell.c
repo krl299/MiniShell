@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:33:00 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/12 20:07:42 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/13 00:29:21 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,24 @@ void	ft_leaks(void)
 
 static void	ft_command(t_data *data, int infd, int outfd, int pipe)
 {
+	int	exist_redir;
 
+	exist_redir = 0;
+	while (data->aux_tkn && data->aux_tkn->type != 7)
+	{
+		if (data->aux_tkn->type == IN_RED || data->aux_tkn->type == OUT_RED || data->aux_tkn->type == APPEND_RED || data->aux_tkn->type == HERE_DOC_RED)
+		{
+			exist_redir = 1;
+			break;
+		}
+		data->aux_tkn = data->aux_tkn->prev;
+	}
+	if (exist_redir)//there are a redirecction before last token or pipe
+		ft_redir(data, &infd, &outfd);
+	else
+		ft_process_commands(data);//, infd, outfd);//need files because there are pipes after
 }
+		
 
 static void	ft_do_commands(t_data *data)
 {
@@ -49,6 +65,7 @@ static void	ft_do_commands(t_data *data)
 		else
 			ft_command(data, infd, pipefd[1], i);
 		close(pipefd[1]);
+		infd = pipefd[0];
 		while (data->aux_tkn && data->aux_tkn->type != PIPE)
 			data->aux_tkn = data->aux_tkn->next;
 		if (data->aux_tkn && data->aux_tkn->type == PIPE)
@@ -80,7 +97,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_create_tokens(&data);
 		ft_print_tokens(&data); // To be removed
 		ft_do_commands(&data);
-		ft_process_commands(&data);
+//		ft_process_commands(&data);
 		ft_clean_tokens(&data);
 	}
 	ft_clean_exit(EXIT_SUCCESS, &data);
