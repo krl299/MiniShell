@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:06:10 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/07/04 18:21:18 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/12 20:01:27 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ void	ft_init_data(t_data *data, int argc, char **argv, char **envp)
 	data->argv = argv;
 	data->linebuffer = NULL;
 	data->tokens = NULL;
+	data->aux_tkn = NULL;
 	ft_copy_envp(data, envp);
 }
