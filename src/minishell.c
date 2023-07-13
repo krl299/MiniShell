@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:33:00 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/13 00:29:21 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/13 13:16:44 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_leaks(void)
 	system("leaks -q minishell");
 }
 
-static void	ft_command(t_data *data, int infd, int outfd, int pipe)
+static void	ft_command(t_data *data, int infd, int outfd)
 {
 	int	exist_redir;
 
@@ -32,7 +32,7 @@ static void	ft_command(t_data *data, int infd, int outfd, int pipe)
 		data->aux_tkn = data->aux_tkn->prev;
 	}
 	if (exist_redir)//there are a redirecction before last token or pipe
-		ft_redir(data, &infd, &outfd);
+		ft_redir(data, infd, outfd);
 	else
 		ft_process_commands(data);//, infd, outfd);//need files because there are pipes after
 }
@@ -61,9 +61,9 @@ static void	ft_do_commands(t_data *data)
 		if (pipe(pipefd) == -1)
 			perror("pipe");
 		if (i == c_pipes)
-			ft_command(data, infd, STDOUT_FILENO, i);
+			ft_command(data, infd, STDOUT_FILENO);
 		else
-			ft_command(data, infd, pipefd[1], i);
+			ft_command(data, infd, pipefd[1]);
 		close(pipefd[1]);
 		infd = pipefd[0];
 		while (data->aux_tkn && data->aux_tkn->type != PIPE)

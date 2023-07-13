@@ -4,7 +4,9 @@ SRCS	=	./src/minishell.c			./src/signal.c				./src/utils.c			\
 			./src/builtins/builtins.c	./src/builtins/pwd.c		./src/builtins/echo.c	\
 			./src/builtins/env.c		./src/builtins/unset.c		./src/builtins/export.c \
 			./src/builtins/cd.c			./src/pipeline/processor.c	./src/pipeline/processor_utils.c \
-			./src/builtins/exit.c
+			./src/builtins/exit.c		./src/redirections/redirections.c					\
+			./src/redirections/input_redir.c			./src/redirections/output_redir.c	\
+			./src/redirections/append_redir.c			./src/redirections/here_doc_redir.c	
 
 OBJS	=	${SRCS:.c=.o}
 
