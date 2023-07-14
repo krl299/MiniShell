@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 16:50:30 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/07/14 02:10:25 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/14 19:00:02 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_get_tokens_count(t_data *data)
 
 	tmp = data->tokens;
 	i = 0;
-	while (tmp)
+	while (tmp && tmp->type != PIPE)
 	{
 		tmp = tmp->next;
 		i++;
@@ -52,7 +52,7 @@ char	**ft_create_argv(t_data *data)
 		ft_error("malloc", STDERR_FILENO);
 	i = 0;
 	aux = data->tokens;
-	while (aux)
+	while (aux && aux->type != PIPE)
 	{
 		argv[i] = ft_strdup(aux->string);
 		aux = aux->next;
@@ -62,7 +62,7 @@ char	**ft_create_argv(t_data *data)
 	return (argv);
 }
 
-void	ft_execve(t_data *data, int fd)
+void	ft_execve(t_data *data, int infd, int outfd)
 {
 	pid_t	pid;
 	int		status;
@@ -71,10 +71,10 @@ void	ft_execve(t_data *data, int fd)
 	if (pid == 0)
 	{
 		ft_replace_path(data);
-		dup2(STDOUT_FILENO, fd);
+		dup2(infd, STDIN_FILENO);
+		dup2(outfd, STDOUT_FILENO);
 		if (execve(data->tokens_str[0], data->tokens_str, data->envp) == -1)
 			ft_error(data->tokens[0].string, STDOUT_FILENO);
-		dup2(fd, STDOUT_FILENO);
 		ft_clean_exit(EXIT_FAILURE, data);
 	}
 	else if (pid < 0)
@@ -90,12 +90,12 @@ void	ft_execve(t_data *data, int fd)
 	}
 }
 
-void	ft_process_commands(t_data *data, int fd)
+void	ft_process_commands(t_data *data, int infd, int outfd)
 {
 	data->tokens_str = ft_create_argv(data);
 	if (data->tokens[0].type == BUILTINS)
-		ft_built(data, fd);
+		ft_built(data, outfd);
 	else
-		ft_execve(data, fd);
+		ft_execve(data, infd, outfd);
 	ft_free_str_array(data->tokens_str);
 }

@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:33:00 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/14 18:27:53 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/14 19:00:18 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	ft_command(t_data *data, int infd, int outfd)
 	if (exist_redir)//there are a redirecction before last token or pipe
 		ft_redir(data, infd, outfd);
 	else
-		ft_process_commands(data, outfd);//need files because there are pipes after
+		ft_process_commands(data, infd, outfd);//need files because there are pipes after
 }
 		
 
@@ -66,6 +66,7 @@ static void	ft_do_commands(t_data *data)
 			ft_command(data, infd, pipefd[1]);
 		close(pipefd[1]);
 		infd = pipefd[0];
+		//printf("pipefd[0] = %d \t pipe[1] = %d\n", pipefd[0], pipefd[1]);
 		while (data->tokens && data->tokens->type != PIPE)
 			data->tokens = data->tokens->next;
 		if (data->tokens && data->tokens->type == PIPE)
