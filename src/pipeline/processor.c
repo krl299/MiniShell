@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 16:50:30 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/07/11 16:13:12 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/14 02:10:25 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	**ft_create_argv(t_data *data)
 	return (argv);
 }
 
-void	ft_execve(t_data *data)
+void	ft_execve(t_data *data, int fd)
 {
 	pid_t	pid;
 	int		status;
@@ -71,8 +71,10 @@ void	ft_execve(t_data *data)
 	if (pid == 0)
 	{
 		ft_replace_path(data);
+		dup2(STDOUT_FILENO, fd);
 		if (execve(data->tokens_str[0], data->tokens_str, data->envp) == -1)
 			ft_error(data->tokens[0].string, STDOUT_FILENO);
+		dup2(fd, STDOUT_FILENO);
 		ft_clean_exit(EXIT_FAILURE, data);
 	}
 	else if (pid < 0)
@@ -88,12 +90,12 @@ void	ft_execve(t_data *data)
 	}
 }
 
-void	ft_process_commands(t_data *data)
+void	ft_process_commands(t_data *data, int fd)
 {
 	data->tokens_str = ft_create_argv(data);
 	if (data->tokens[0].type == BUILTINS)
-		ft_built(data);
+		ft_built(data, fd);
 	else
-		ft_execve(data);
+		ft_execve(data, fd);
 	ft_free_str_array(data->tokens_str);
 }

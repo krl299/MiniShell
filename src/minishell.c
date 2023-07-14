@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:33:00 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/13 13:16:44 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/14 02:29:45 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	ft_command(t_data *data, int infd, int outfd)
 	if (exist_redir)//there are a redirecction before last token or pipe
 		ft_redir(data, infd, outfd);
 	else
-		ft_process_commands(data);//, infd, outfd);//need files because there are pipes after
+		ft_process_commands(data, outfd);//need files because there are pipes after
 }
 		
 
