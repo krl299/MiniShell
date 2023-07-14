@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:33:00 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/14 02:29:45 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/14 18:27:53 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,11 @@ static void	ft_do_commands(t_data *data)
 			ft_command(data, infd, pipefd[1]);
 		close(pipefd[1]);
 		infd = pipefd[0];
-		while (data->aux_tkn && data->aux_tkn->type != PIPE)
-			data->aux_tkn = data->aux_tkn->next;
-		if (data->aux_tkn && data->aux_tkn->type == PIPE)
-			data->aux_tkn = data->aux_tkn->next;
+		while (data->tokens && data->tokens->type != PIPE)
+			data->tokens = data->tokens->next;
+		if (data->tokens && data->tokens->type == PIPE)
+			data->tokens = data->tokens->next;
+		data->aux_tkn = data->tokens;
 		i++;
 	}
 }
