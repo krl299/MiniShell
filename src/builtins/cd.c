@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 17:40:47 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/14 02:04:30 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/15 18:06:57 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	ft_update_cd(t_data *data)
 
 void	ft_built_cd(t_data *data)
 {
-	if ((data->aux_tkn->next == NULL || ft_strcmp(data->aux_tkn->next->string, "") == 0))
+	if ((data->tokens->next == NULL || ft_strcmp(data->tokens->next->string, "") == 0))
 	{
 		if (chdir(getenv("HOME")) != 0)
 		{
@@ -65,10 +65,10 @@ void	ft_built_cd(t_data *data)
 			return ;
 		}
 	}
-	else if (chdir(data->aux_tkn->next->string) != 0)
+	else if (chdir(data->tokens->next->string) != 0)
 	{
 		ft_putstr_fd("cd: ", STDERR_FILENO);
-		ft_putstr_fd(data->aux_tkn->next->string, STDERR_FILENO);
+		ft_putstr_fd(data->tokens->next->string, STDERR_FILENO);
 		ft_putstr_fd(": ", STDERR_FILENO);
 		ft_putendl_fd(strerror(2), STDERR_FILENO);
 		return ;
