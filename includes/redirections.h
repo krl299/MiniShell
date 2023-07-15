@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   redirections.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/29 19:16:20 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/14 01:35:35 by cmoran-l         ###   ########.fr       */
+/*   Created: 2023/07/13 00:36:26 by cmoran-l          #+#    #+#             */
+/*   Updated: 2023/07/13 00:40:56 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#ifndef REDIRECCTIONS_H
+# define REDIRECCTIONS_H
+# include "parser.h"
 
-void	ft_built_pwd(int fd)
-{
-	char	*cwd;
+void	ft_redir(t_data *data, int infd, int outfd);
 
-	cwd = getcwd(NULL, 0);
-	if (cwd == NULL)
-		perror("pwd");
-	else
-	{
-		ft_putstr_fd(cwd, fd);
-		ft_putstr_fd("\n", fd);
-	}
-	free(cwd);
-}
+void	ft_input_redir(t_data *data, int infd);
+
+void	ft_output_redir(t_data *data, int outfd);
+
+void	ft_append_redir(t_data *data, int outfd);
+
+void	ft_here_doc_redir(t_data *data, int infd);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:26:46 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/09 18:56:04 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/14 18:14:14 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_data
 	char	**tokens_str;
 	char	*linebuffer;
 	t_token	*tokens;
+	t_token	*aux_tkn;
 }	t_data;
 
 // INIT_DATA.C

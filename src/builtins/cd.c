@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 17:40:47 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/09 17:05:04 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/15 18:06:57 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	ft_update_env(t_data *data, char *input)
 
 static void	ft_update_cd(t_data *data)
 {
-//	OLDPWD = PWD > PWD = NEW_PWD
 	char	*new_pwd;
 	char	*old_pwd;
 	char	*value_new_pwd;
