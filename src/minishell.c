@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:33:00 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/14 19:00:18 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/15 17:50:53 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	ft_do_commands(t_data *data)
 	int		i;
 	int		pipefd[2];
 	int		infd;
+	t_token	*tmp;
 
 	c_pipes = 0;
 	infd = STDIN_FILENO;
@@ -56,6 +57,7 @@ static void	ft_do_commands(t_data *data)
 	}
 	i = 0;
 	data->aux_tkn = data->tokens;
+	tmp = data->tokens;
 	while (i <= c_pipes && data->aux_tkn)
 	{
 		if (pipe(pipefd) == -1)
@@ -74,6 +76,7 @@ static void	ft_do_commands(t_data *data)
 		data->aux_tkn = data->tokens;
 		i++;
 	}
+	data->tokens = tmp;
 }
 
 int	main(int argc, char **argv, char **envp)

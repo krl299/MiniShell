@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 19:36:42 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/07/14 19:33:33 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/15 17:51:08 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_clean_token_list(t_token *tokens)
 	tmp = tokens;
 	while (tokens)
 	{
-		tmp = tokens->prev;
+		tmp = tokens->next;
 		free(tokens->string);
 		free(tokens);
 		tokens = tmp;
