@@ -16,12 +16,12 @@
 
 void	ft_redir(t_data *data, int infd, int outfd);
 
-void	ft_input_redir(t_data *data, int infd);
+void	ft_input_redir(t_data *data, int *infd);
 
 void	ft_output_redir(t_data *data, int *outfd, int is_ap);
 
 void	ft_append_redir(t_data *data, int outfd);
 
-void	ft_here_doc_redir(t_data *data, int infd);
+void	ft_here_doc_redir(t_data *data, int *infd);
 
 #endif

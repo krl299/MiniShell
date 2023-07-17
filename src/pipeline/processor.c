@@ -32,8 +32,8 @@ int	ft_get_tokens_count(t_data *data)
 
 	tmp = data->tokens;
 	i = 0;
-	while (tmp && tmp->type != PIPE && tmp->type != OUT_RED
-		&& tmp->type != APPEND_RED && tmp->type != HERE_DOC_RED)
+	while (tmp && tmp->type != PIPE && tmp->type != IN_RED && \
+		tmp->type != OUT_RED && tmp->type != APPEND_RED && tmp->type != HERE_DOC_RED)
 	{
 		tmp = tmp->next;
 		i++;
@@ -53,8 +53,8 @@ char	**ft_create_argv(t_data *data)
 		ft_error("malloc", STDERR_FILENO);
 	i = 0;
 	aux = data->tokens;
-	while (aux && aux->type != PIPE && aux->type != OUT_RED
-		&& aux->type != APPEND_RED && aux->type != HERE_DOC_RED)
+	while (aux && aux->type != PIPE && aux->type != IN_RED && \
+		aux->type != OUT_RED && aux->type != APPEND_RED && aux->type != HERE_DOC_RED)
 	{
 		argv[i] = ft_strdup(aux->string);
 		aux = aux->next;
