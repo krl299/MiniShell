@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:33:00 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/15 19:52:06 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/17 17:46:06 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_leaks(void)
 	system("leaks -q minishell");
 }
 
-static void	ft_command(t_data *data, int infd, int outfd)
+void	ft_command(t_data *data, int infd, int outfd)
 {
 	int	exist_redir;
 
@@ -27,7 +27,7 @@ static void	ft_command(t_data *data, int infd, int outfd)
 		if (data->aux_tkn->type == IN_RED || data->aux_tkn->type == OUT_RED || data->aux_tkn->type == APPEND_RED || data->aux_tkn->type == HERE_DOC_RED)
 		{
 			exist_redir = 1;
-			break;
+			break ;
 		}
 		data->aux_tkn = data->aux_tkn->next;
 	}

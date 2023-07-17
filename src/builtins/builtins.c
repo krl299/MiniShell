@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:17:40 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/14 17:37:48 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/15 19:40:41 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,10 @@ void	ft_built(t_data *data, int fd)
 		ft_built_env(data);
 	else if (ft_strcmp(data->tokens->string, "exit") == 0)
 		ft_built_exit(data);
+	else
+	{
+		ft_putstr_fd("Conchita: command not found: ", 2);
+		ft_putstr_fd(data->tokens->string, 2);
+		ft_putstr_fd("\n", 2);
+	}
 }

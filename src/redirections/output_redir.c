@@ -3,17 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   output_redir.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 18:46:38 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/15 18:47:02 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/17 17:23:25 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_output_redir(t_data *data, int outfd)
+void	ft_output_redir(t_data *data, int *outfd, int is_ap)
 {
-	(void)data;
-	(void)outfd;
+	int		fd;
+	char	**aux;
+
+	aux = ft_split(data->aux_tkn->string, ' ');
+	if (!aux[1] || aux == NULL)
+	{
+		ft_free_str_array(aux);
+		ft_putstr_fd("Conchita: redirect syntax error\n", 2);
+		return ;
+	}
+	if (is_ap == 1)
+		fd = open(aux[1], O_WRONLY | O_CREAT | O_APPEND, 0777);
+	else
+		fd = open(aux[1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	ft_free_str_array(aux);
+	if (*outfd != STDOUT_FILENO)
+		close(*outfd);
+	*outfd = fd;
 }

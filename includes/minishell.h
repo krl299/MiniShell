@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:34:23 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/13 00:41:37 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/17 17:46:03 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,8 @@ void	ft_set_signal(void);
 //	UTILS.C
 int		ft_empty_line(const char *str);
 int     ft_is_inter(char *str);
+
+// MINISHELL.C
+void	ft_command(t_data *data, int infd, int outfd);
 
 #endif
