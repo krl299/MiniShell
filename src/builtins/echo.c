@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 19:20:01 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/14 19:02:31 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/17 18:14:01 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ void	ft_built_echo(t_token *tokens, int fd)
 		flag = 1;
 		aux = aux->next;
 	}
-	while (aux->string && ft_is_n(aux->string) == 1)
+	while (aux && aux->string && ft_is_n(aux->string) == 1)
 		aux = aux->next;
-	while (aux && aux->type != PIPE)
+	while (aux && aux->type != PIPE && aux->type != OUT_RED
+		&& aux->type != APPEND_RED && aux->type != HERE_DOC_RED)
 	{
 		if (first == 0)
 			if (aux->has_space == 1)
