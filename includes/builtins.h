@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:21:08 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/14 01:32:45 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/17 18:49:24 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	ft_built_pwd(int fd);
 int		ft_is_n(char *str);
 void	ft_built_echo(t_token *token, int fd);
 //
-void	ft_built_cd();
+void	ft_built_cd(t_data *data);
 //
-void	ft_built_export();
+void	ft_built_export(t_data *data);
 //
 void	ft_built_unset(t_data *data);
 //
 void	ft_built_env(t_data *data);
 //
-void	ft_built_exit();
+void	ft_built_exit(t_data *data);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 17:53:18 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/11 17:21:19 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:11:38 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	ft_update_env(t_data *data)
 		i++;
 	}
 	free(var_input);
-	return (0);	
+	return (0);
 }
 
 static char	**ft_add_env(t_data *data, char *input)
@@ -60,18 +60,21 @@ static char	**ft_add_env(t_data *data, char *input)
 
 void	ft_built_export(t_data *data)
 {
-	char *input;
-	char *format;
-	t_token *arg;
+	char	*input;
+	char	*format;
+	t_token	*arg;
 
 	arg = data->tokens;
-	if (!arg->next || (arg->next->type != 0 && arg->next->type != 1 && arg->next->type != 2))
+	if (!arg->next || (arg->next->type != 0
+			&& arg->next->type != 1 && arg->next->type != 2))
 		ft_built_env(data);
-	else if(arg->next && (arg->next->type == 0 || arg->next->type == 1 || arg->next->type == 2))
+	else if (arg->next && (arg->next->type == 0
+			|| arg->next->type == 1 || arg->next->type == 2))
 	{
 		input = arg->next->string;
 		format = ft_strchr(input, '=');
-		if (ft_isalpha(*input) == 1 && ft_strchr(input, '=') != 0 && *(format + 1) != 0)
+		if (ft_isalpha(*input) == 1 && ft_strchr(input, '=')
+			!= 0 && *(format + 1) != 0)
 		{
 			if (ft_update_env(data) == 0)
 				data->envp = ft_add_env(data, input);

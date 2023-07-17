@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:00:45 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/03 15:04:52 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:20:29 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	ft_sigint_handler()
+static void	ft_sigint_handler(int sig)
 {
+	(void)sig;
 	write(1, "\n", 1);
 	rl_replace_line("", 1);
 	rl_on_new_line();

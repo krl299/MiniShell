@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 18:46:02 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/17 08:38:24 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:05:47 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	ft_input_redir(t_data *data, int *infd)
 {
 	int		new_infd;
-	(void)infd;
 	char	**tmp;
 	char	*tmp_str;
 
@@ -25,7 +24,8 @@ void	ft_input_redir(t_data *data, int *infd)
 	{
 		ft_free_str_array(tmp);
 		ft_putstr_fd("Conchita: ", STDERR_FILENO);
-		ft_putstr_fd("syntax error near unexpected token `newline'\n", STDERR_FILENO);
+		ft_putstr_fd("syntax error near unexpected token `newline'\n",
+			STDERR_FILENO);
 		return ;
 	}
 	new_infd = open(tmp[0], O_RDONLY);

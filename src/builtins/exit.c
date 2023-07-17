@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:17:47 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/11 16:36:59 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:13:46 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../includes/minishell.h"
 
 void	ft_built_exit(t_data *data)
 {
-	int	i;
+	int		i;
 	t_token	*aux_tkn;
 
 	i = 0;
