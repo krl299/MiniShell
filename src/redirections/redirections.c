@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 00:25:00 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/17 18:02:21 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/17 18:31:16 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_redir(t_data *data, int infd, int outfd)
 	else if (data->aux_tkn->type == HERE_DOC_RED)
 		ft_here_doc_redir(data, &infd);
 	if (tmp->next && (tmp->next->type == OUT_RED
-			|| tmp->next->next->type == APPEND_RED || tmp->next->type == IN_RED
+			|| tmp->next->type == APPEND_RED || tmp->next->type == IN_RED
 			|| tmp->next->type == HERE_DOC_RED))
 	{
 		data->aux_tkn = tmp->next;
