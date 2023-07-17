@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:17:40 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/15 19:40:41 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/17 18:40:58 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ void	ft_built(t_data *data, int fd)
 		ft_putstr_fd("Conchita: command not found: ", 2);
 		ft_putstr_fd(data->tokens->string, 2);
 		ft_putstr_fd("\n", 2);
+		data->id_last_proc = 127;
 	}
 }
