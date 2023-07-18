@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:00:45 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/17 19:20:29 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/18 16:34:20 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ static int	ft_get_is_fork(void)
 	return (is_fork);
 }
 
-static void	ft_sigint_handler()
+static void	ft_sigint_handler(int signum)
 {
+	(void)signum;
 	write(1, "\n", 1);
 	rl_replace_line("", 1);
 	rl_on_new_line();
