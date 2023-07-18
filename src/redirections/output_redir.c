@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 18:46:38 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/17 18:56:08 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/18 16:26:47 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	ft_output_redir(t_data *data, int *outfd, int is_ap)
 	char	**aux;
 	char	*aux_str;
 
-	aux_str = data->aux_tkn->string + 1;
+	if (is_ap)
+		aux_str = data->aux_tkn->string + 2;
+	else
+		aux_str = data->aux_tkn->string + 1;
 	aux = ft_split(aux_str, ' ');
 	if (!aux[0] || aux == NULL)
 	{
