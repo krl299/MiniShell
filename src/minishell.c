@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:33:00 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/18 14:04:00 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/17 18:52:34 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,35 @@ void	ft_command(t_data *data, int infd, int outfd)
 	ft_is_fork(0);
 	while (data->aux_tkn && data->aux_tkn->type != PIPE)
 	{
-		if (data->aux_tkn->type == IN_RED || data->aux_tkn->type == OUT_RED || data->aux_tkn->type == APPEND_RED || data->aux_tkn->type == HERE_DOC_RED)
+		if (data->aux_tkn->type == IN_RED || data->aux_tkn->type == OUT_RED
+			|| data->aux_tkn->type == APPEND_RED
+			|| data->aux_tkn->type == HERE_DOC_RED)
 		{
 			exist_redir = 1;
 			break ;
 		}
 		data->aux_tkn = data->aux_tkn->next;
 	}
-	if (exist_redir)//there are a redirecction before last token or pipe
+	if (exist_redir)
 		ft_redir(data, infd, outfd);
 	else
-		ft_process_commands(data, infd, outfd);//need files because there are pipes after
+		ft_process_commands(data, infd, outfd);
+}
+
+int	ft_count_pipes(t_data *data)
+{
+	int		c_pipes;
+	t_token	*tmp;
+
+	c_pipes = 0;
+	tmp = data->tokens;
+	while (tmp)
+	{
+		if (tmp->type == PIPE)
+			c_pipes++;
+		tmp = tmp->next;
+	}
+	return (c_pipes);
 }
 
 static void	ft_do_commands(t_data *data)
@@ -46,15 +64,8 @@ static void	ft_do_commands(t_data *data)
 	int		infd;
 	t_token	*tmp;
 
-	c_pipes = 0;
+	c_pipes = ft_count_pipes(data);
 	infd = STDIN_FILENO;
-	data->aux_tkn = data->tokens;
-	while (data->aux_tkn)
-	{
-		if (data->aux_tkn->type == PIPE)
-			c_pipes++;
-		data->aux_tkn = data->aux_tkn->next;
-	}
 	i = 0;
 	data->aux_tkn = data->tokens;
 	tmp = data->tokens;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 17:40:47 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/15 18:06:57 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:12:57 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ static void	ft_update_cd(t_data *data)
 
 void	ft_built_cd(t_data *data)
 {
-	if ((data->tokens->next == NULL || ft_strcmp(data->tokens->next->string, "") == 0))
+	if ((data->tokens->next == NULL
+			|| ft_strcmp(data->tokens->next->string, "") == 0))
 	{
 		if (chdir(getenv("HOME")) != 0)
 		{
