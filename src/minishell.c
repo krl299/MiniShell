@@ -6,16 +6,11 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:33:00 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/18 16:57:31 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/18 19:32:47 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	ft_leaks(void)
-{
-	system("leaks -q minishell");
-}
 
 void	ft_command(t_data *data, int infd, int outfd)
 {
@@ -89,11 +84,16 @@ static void	ft_do_commands(t_data *data)
 	data->tokens = tmp;
 }
 
+// void	ft_leaks(void)
+// {
+// 	system("leaks -q minishell");
+// }
+// ft_print_tokens(&data); // To be removed
+// atexit(ft_leaks);
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
-	atexit(ft_leaks);
 	ft_init_data(&data, argc, argv, envp);
 	ft_init_shell(&data);
 	ft_set_signal();
@@ -111,7 +111,6 @@ int	main(int argc, char **argv, char **envp)
 		}
 		add_history(data.linebuffer);
 		ft_create_tokens(&data);
-		ft_print_tokens(&data); // To be removed
 		ft_do_commands(&data);
 		ft_clean_tokens(&data);
 	}

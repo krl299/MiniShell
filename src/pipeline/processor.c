@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 16:50:30 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/07/17 19:27:57 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/18 18:53:42 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_execve(t_data *data, int infd, int outfd)
 {
 	pid_t	pid;
 	int		status;
-	
+
 	ft_is_fork(1);
 	pid = fork();
 	if (pid == 0)
