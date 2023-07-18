@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 18:46:02 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/17 08:38:24 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/18 02:33:40 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_input_redir(t_data *data, int *infd)
 		perror("open: ");
 		return ;
 	}
-	if (*infd != 0)
+	if (*infd != STDIN_FILENO)
 		close(*infd);
 	*infd = new_infd;
 }
