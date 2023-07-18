@@ -25,22 +25,24 @@ RL_LIB	=	-I/Users/$(USER)/.brew/opt/readline/include
 RL_LIB_LINK	=	-L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 
 .c.o:
-		${GCC} -c $< ${RL_LIB} ${LIBFT} -o ${<:.c=.o}
+		@${GCC} -c $< ${RL_LIB} ${LIBFT} -o ${<:.c=.o}
 
 all:	libft	$(NAME)
 
 libft:	
-		make -C libft
+		@make -C libft
 
 $(NAME):	${OBJS}
-		${GCC} ${OBJS} ${RL_LIB_LINK} ${LIBFT_LINK} -o ${NAME}
+		@${GCC} ${OBJS} ${RL_LIB_LINK} ${LIBFT_LINK} -o ${NAME}
+		@echo "minishell compiled"
 
 clean:
-		${RM} ${OBJS}
-		make -C libft fclean
+		@${RM} ${OBJS}
+		@make -C libft fclean
 
 fclean:	clean
-		${RM} ${NAME}
+		@${RM} ${NAME}
+		@echo "minishell cleaned"
 
 re:		fclean all
 
