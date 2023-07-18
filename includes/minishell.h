@@ -37,6 +37,7 @@
 
 //	SIGNAL.C
 void	ft_set_signal(void);
+void	ft_is_fork(int i);
 
 //	UTILS.C
 int		ft_empty_line(const char *str);

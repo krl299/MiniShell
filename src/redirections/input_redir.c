@@ -35,7 +35,7 @@ void	ft_input_redir(t_data *data, int *infd)
 		perror("open: ");
 		return ;
 	}
-	if (*infd != 0)
+	if (*infd != STDIN_FILENO)
 		close(*infd);
 	*infd = new_infd;
 }
