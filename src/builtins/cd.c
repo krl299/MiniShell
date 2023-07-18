@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 17:40:47 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/18 19:01:28 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/18 19:57:58 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,36 @@ static void	ft_update_cd(t_data *data)
 	free(value_old_pwd);
 }
 
+int	ft_is_relative(t_data *data)
+{
+	if (data->tokens->next->string[0] == '~')
+		return (1);
+	return (0);
+}
+
+static void	ft_change_cd(t_data *data)
+{
+	char	*tmp;
+
+	if (ft_is_relative(data))
+	{
+		tmp = ft_strjoin(getenv("HOME"), data->tokens->next->string + 1);
+		free(data->tokens->next->string);
+		data->tokens->next->string = tmp;
+	}
+	if (chdir(data->tokens->next->string) != 0)
+	{
+		ft_putstr_fd("cd: ", STDERR_FILENO);
+		ft_putstr_fd(data->tokens->next->string, STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
+		ft_putendl_fd(strerror(2), STDERR_FILENO);
+		return ;
+	}
+}
+
 void	ft_built_cd(t_data *data)
 {
-	if (data->tokens->next == NULL
-		|| ft_strcmp(data->tokens->next->string, "") == 0
+	if (data->tokens->next == NULL || !ft_strcmp(data->tokens->next->string, "")
 		|| data->tokens->next->type == PIPE
 		|| data->tokens->next->type == IN_RED
 		|| data->tokens->next->type == OUT_RED
@@ -71,13 +97,7 @@ void	ft_built_cd(t_data *data)
 			return ;
 		}
 	}
-	else if (chdir(data->tokens->next->string) != 0)
-	{
-		ft_putstr_fd("cd: ", STDERR_FILENO);
-		ft_putstr_fd(data->tokens->next->string, STDERR_FILENO);
-		ft_putstr_fd(": ", STDERR_FILENO);
-		ft_putendl_fd(strerror(2), STDERR_FILENO);
-		return ;
-	}
+	else
+		ft_change_cd(data);
 	ft_update_cd(data);
 }
