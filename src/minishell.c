@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:33:00 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/17 17:46:06 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/18 14:04:00 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_command(t_data *data, int infd, int outfd)
 	int	exist_redir;
 
 	exist_redir = 0;
+	ft_is_fork(0);
 	while (data->aux_tkn && data->aux_tkn->type != PIPE)
 	{
 		if (data->aux_tkn->type == IN_RED || data->aux_tkn->type == OUT_RED || data->aux_tkn->type == APPEND_RED || data->aux_tkn->type == HERE_DOC_RED)
