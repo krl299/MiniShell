@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:34:23 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/17 17:46:03 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:59:45 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 
 //	SIGNAL.C
 void	ft_set_signal(void);
+void	ft_is_fork(int i);
 
 //	UTILS.C
 int		ft_empty_line(const char *str);

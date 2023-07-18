@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 16:50:30 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/07/17 17:31:37 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/18 14:01:43 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void	ft_execve(t_data *data, int infd, int outfd)
 {
 	pid_t	pid;
 	int		status;
-
+	
+	ft_is_fork(1);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -98,6 +99,9 @@ void	ft_process_commands(t_data *data, int infd, int outfd)
 	if (data->tokens[0].type == BUILTINS)
 		ft_built(data, outfd);
 	else
+	{
 		ft_execve(data, infd, outfd);
+		ft_is_fork(0);
+	}
 	ft_free_str_array(data->tokens_str);
 }
