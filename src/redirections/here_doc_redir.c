@@ -6,7 +6,7 @@
 /*   By: cmoran-l <cmoran-l@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 18:45:02 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/18 13:31:19 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/18 16:29:14 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static char	*ft_get_delimiter(t_token *tkn)
 	tmp_str = tkn->string + 2;
 	aux_str = ft_strtrim(tmp_str, " ");
 	tmp_str = ft_strjoin(aux_str, "\n");
+	free(aux_str);
 	return (tmp_str);
 }
 
