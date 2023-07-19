@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 16:50:30 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/07/18 18:53:42 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:49:06 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,17 @@ void	ft_execve(t_data *data, int infd, int outfd)
 void	ft_process_commands(t_data *data, int infd, int outfd)
 {
 	data->tokens_str = ft_create_argv(data);
+	if (access(data->tokens_str[0], F_OK) == 0)
+	{
+		if(ft_strnstr(data->tokens_str[0], "./", 3) == 0 && ft_strnstr(data->tokens_str[0], "/", 2) == 0)
+		{
+			ft_putstr_fd(data->tokens_str[0], STDERR_FILENO);
+			ft_putstr_fd(": ", STDERR_FILENO);
+			ft_putstr_fd("command not found \n", STDERR_FILENO);
+			data->id_last_proc = 127;
+			return ;
+		}
+	}
 	if (data->tokens[0].type == BUILTINS)
 		ft_built(data, outfd);
 	else
