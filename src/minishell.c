@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:33:00 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/18 19:57:36 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/19 12:12:34 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,10 @@ int	main(int argc, char **argv, char **envp)
 		data.linebuffer = NULL;
 		data.linebuffer = readline("Conchita $>");
 		if (data.linebuffer == NULL)
+		{
+			printf("\n");
 			break ;
+		}
 		if (ft_strncmp(data.linebuffer, "", strlen(data.linebuffer)) == 0
 			|| ft_empty_line(data.linebuffer) == 0)
 		{
