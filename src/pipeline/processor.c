@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 16:50:30 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/07/19 16:13:41 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:19:20 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ void	ft_process_commands(t_data *data, int infd, int outfd)
 	data->tokens_str = ft_create_argv(data);
 	if (access(data->tokens_str[0], F_OK) == 0)
 	{
-		if(ft_strnstr(data->tokens_str[0], "./", 3) == 0 && ft_strnstr(data->tokens_str[0], "/", 2) == 0)
+		if (ft_strnstr(data->tokens_str[0], "./", 3) == 0
+			&& ft_strnstr(data->tokens_str[0], "/", 2) == 0)
 		{
 			ft_putstr_fd(data->tokens_str[0], STDERR_FILENO);
 			ft_putstr_fd(": ", STDERR_FILENO);

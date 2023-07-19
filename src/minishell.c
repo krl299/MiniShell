@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmatas-p <jmatas-p@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 10:33:00 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/19 16:14:49 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:52:30 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,15 @@ int	ft_count_pipes(t_data *data)
 	return (c_pipes);
 }
 
+void	ft_next_pipe(t_data *data)
+{
+	while (data->tokens && data->tokens->type != PIPE)
+		data->tokens = data->tokens->next;
+	if (data->tokens && data->tokens->type == PIPE)
+		data->tokens = data->tokens->next;
+	data->aux_tkn = data->tokens;
+}
+
 static void	ft_do_commands(t_data *data)
 {
 	int		c_pipes;
@@ -73,11 +82,7 @@ static void	ft_do_commands(t_data *data)
 			ft_command(data, infd, pipefd[1]);
 		close(pipefd[1]);
 		infd = pipefd[0];
-		while (data->tokens && data->tokens->type != PIPE)
-			data->tokens = data->tokens->next;
-		if (data->tokens && data->tokens->type == PIPE)
-			data->tokens = data->tokens->next;
-		data->aux_tkn = data->tokens;
+		ft_next_pipe(data);
 		i++;
 	}
 	data->tokens = tmp;
@@ -101,10 +106,7 @@ int	main(int argc, char **argv, char **envp)
 		data.linebuffer = NULL;
 		data.linebuffer = readline("Conchita $>");
 		if (data.linebuffer == NULL)
-		{
-			printf("\n");
 			break ;
-		}
 		if (ft_strncmp(data.linebuffer, "", strlen(data.linebuffer)) == 0
 			|| ft_empty_line(data.linebuffer) == 0)
 		{

@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 18:14:18 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/07/17 19:15:18 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:46:17 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,35 +85,40 @@ void	ft_replace_env(t_token *token, int s, int e, char *value)
 	token->string = new;
 }
 
-int	ft_replace_var(t_token *token, t_data *data)
+void	ft_replace_dollar(t_data *data, t_token *token, int e)
 {
 	int		s;
-	int		e;
 	char	*env;
 	char	*value;
 
-	s = 0;
+	s = e;
+	while (token->string[e] && (ft_isalnum(token->string[e])
+			|| token->string[e] == '_'))
+			e++;
+	if (ft_is_inter(token->string))
+		env = ft_substr(token->string, s, 1);
+	else
+		env = ft_substr(token->string, s, e - s);
+	if (ft_strcmp(env, "?") == 0)
+		value = ft_itoa(data->id_last_proc);
+	else
+		value = ft_get_env(env, data);
+	ft_replace_env(token, s - 1, s + ft_strlen(env), value);
+	free(env);
+	free(value);
+}
+
+int	ft_replace_var(t_token *token, t_data *data)
+{
+	int		e;
+
 	e = 0;
 	while (token->string[e] && token->string[e] != '$')
 		e++;
 	if (token->string[e] == '$' && token->string[e + 1])
 	{
 		e++;
-		s = e;
-		while (token->string[e] && (ft_isalnum(token->string[e])
-				|| token->string[e] == '_'))
-				e++;
-		if (ft_is_inter(token->string))
-			env = ft_substr(token->string, s, 1);
-		else
-			env = ft_substr(token->string, s, e - s);
-		if (ft_strcmp(env, "?") == 0)
-			value = ft_itoa(data->id_last_proc);
-		else
-			value = ft_get_env(env, data);
-		ft_replace_env(token, s - 1, s + ft_strlen(env), value);
-		free(env);
-		free(value);
+		ft_replace_dollar(data, token, e);
 		return (1);
 	}
 	return (0);

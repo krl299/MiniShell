@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 19:20:01 by cmoran-l          #+#    #+#             */
-/*   Updated: 2023/07/17 18:14:01 by jmatas-p         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:46:35 by jmatas-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,15 @@ int	ft_is_n(char *str)
 		return (0);
 }
 
+void	ft_flag(t_token *aux, int *flag)
+{
+	if (aux && ft_is_n(aux->string) == 1)
+	{
+		*flag = 1;
+		aux = aux->next;
+	}
+}
+
 void	ft_built_echo(t_token *tokens, int fd)
 {
 	int		flag;
@@ -39,11 +48,7 @@ void	ft_built_echo(t_token *tokens, int fd)
 	flag = 0;
 	first = 1;
 	aux = tokens->next;
-	if (aux && ft_is_n(aux->string) == 1)
-	{
-		flag = 1;
-		aux = aux->next;
-	}
+	ft_flag(aux, &flag);
 	while (aux && aux->string && ft_is_n(aux->string) == 1)
 		aux = aux->next;
 	while (aux && aux->type != PIPE && aux->type != OUT_RED
