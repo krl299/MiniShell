@@ -6,7 +6,7 @@
 /*   By: jmatas-p <jmatas-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 16:50:30 by jmatas-p          #+#    #+#             */
-/*   Updated: 2023/07/19 13:49:06 by cmoran-l         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:13:41 by cmoran-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	ft_process_commands(t_data *data, int infd, int outfd)
 			ft_putstr_fd(": ", STDERR_FILENO);
 			ft_putstr_fd("command not found \n", STDERR_FILENO);
 			data->id_last_proc = 127;
+			ft_free_str_array(data->tokens_str);
 			return ;
 		}
 	}
